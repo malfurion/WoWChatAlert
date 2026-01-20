@@ -1,10 +1,11 @@
-## Interface: 110002
+## Interface: 110207
 ## Title: ChatAlert
 ## Notes: Plays an airhorn sound when chat messages match configured patterns
 ## Author: YourName
-## Version: 1.0.1
+## Version: 1.0.2
 ## SavedVariables: ChatAlertDB
 ## IconTexture: Interface\Icons\INV_Misc_Horn_01
+## X-Curse-Project-ID: 1438645
 
 ## Category-enUS: Chat
 ## Category-deDE: Chat

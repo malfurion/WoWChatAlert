@@ -1,5 +1,12 @@
 # ChatAlert Changelog
 
+## [1.0.2] - 2026-01-20
+
+### Changes
+- Added CurseForge project ID to .toc file for automated uploads
+- Updated game version to 11.2.7 (WoW Patch 11.2.7)
+- Included default airhorn sound in release package
+
 ## [1.0.1] - 2026-01-20
 
 ### Changes
