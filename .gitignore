@@ -8,8 +8,9 @@ Sounds/*.ogg
 Sounds/*.mp3
 Sounds/*.wav
 
-# Keep sound directory README
+# Keep sound directory README and default airhorn
 !Sounds/README.md
+!Sounds/airhorn.ogg
 
 # OS Files
 .DS_Store
