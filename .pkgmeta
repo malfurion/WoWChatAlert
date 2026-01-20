@@ -1,5 +1,8 @@
 package-as: ChatAlert
 
+# CurseForge Project ID
+curse-project-id: 1438645
+
 # Don't include these files in the package
 ignore:
   - README.md
