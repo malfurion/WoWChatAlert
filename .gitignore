@@ -1,0 +1,27 @@
+# Ace3 Libraries (automatically downloaded by packager)
+# Ignore all Libs except for the installation instructions
+Libs/*
+!Libs/LIBS_INSTALLATION.md
+
+# Sound files (users must provide their own)
+Sounds/*.ogg
+Sounds/*.mp3
+Sounds/*.wav
+
+# Keep sound directory README
+!Sounds/README.md
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Packager generated files
+.release/
+*.zip

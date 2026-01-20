@@ -1,0 +1,42 @@
+## Interface: 110002
+## Title: ChatAlert
+## Notes: Plays an airhorn sound when chat messages match configured patterns
+## Author: YourName
+## Version: 1.0.0
+## SavedVariables: ChatAlertDB
+## IconTexture: Interface\Icons\INV_Misc_Horn_01
+
+## Category-enUS: Chat
+## Category-deDE: Chat
+## Category-esES: Chat
+## Category-esMX: Chat
+## Category-frFR: Chat
+## Category-itIT: Chat
+## Category-koKR: Chat
+## Category-ptBR: Chat
+## Category-ruRU: Chat
+## Category-zhCN: Chat
+## Category-zhTW: Chat
+
+# Libraries
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+
+# Ace3 Libraries
+Libs\AceAddon-3.0\AceAddon-3.0.lua
+Libs\AceEvent-3.0\AceEvent-3.0.lua
+Libs\AceDB-3.0\AceDB-3.0.lua
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
+Libs\AceConsole-3.0\AceConsole-3.0.lua
+
+# AceConfig
+Libs\AceConfig-3.0\AceConfig-3.0.lua
+Libs\AceConfig-3.0\AceConfigRegistry-3.0\AceConfigRegistry-3.0.lua
+Libs\AceConfig-3.0\AceConfigDialog-3.0\AceConfigDialog-3.0.lua
+
+# AceGUI
+Libs\AceGUI-3.0\AceGUI-3.0.lua
+
+# Core Files
+Core.lua
+Config.lua
