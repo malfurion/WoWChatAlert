@@ -1,15 +1,15 @@
 # ChatAlert
 
-[![GitHub release](https://img.shields.io/github/v/release/YOUR_GITHUB_USERNAME/ChatAlert)](https://github.com/YOUR_GITHUB_USERNAME/ChatAlert/releases)
+[![GitHub release](https://img.shields.io/github/v/release/malfurion/WoWChatAlert)](https://github.com/malfurion/WoWChatAlert/releases)
 [![CurseForge](https://img.shields.io/badge/CurseForge-Download-orange)](https://www.curseforge.com/wow/addons/chatalert)
-[![License](https://img.shields.io/github/license/YOUR_GITHUB_USERNAME/ChatAlert)](LICENSE)
+[![License](https://img.shields.io/github/license/malfurion/WoWChatAlert)](LICENSE)
 
 A World of Warcraft addon that monitors chat messages and plays an airhorn sound when messages match configured patterns.
 
 ## Download
 
 - **[CurseForge](https://www.curseforge.com/wow/addons/chatalert)** (Recommended - auto-updates with CurseForge client)
-- **[GitHub Releases](https://github.com/YOUR_GITHUB_USERNAME/ChatAlert/releases)**
+- **[GitHub Releases](https://github.com/malfurion/WoWChatAlert/releases)**
 - **[Wago Addons](https://addons.wago.io/addons/chatalert)**
 
 ## Features
@@ -30,7 +30,7 @@ Use the **CurseForge client** or **Wago** app - they will automatically download
 
 ### Manual Installation
 
-1. Download the latest release from [CurseForge](https://www.curseforge.com/wow/addons/chatalert) or [GitHub Releases](https://github.com/YOUR_GITHUB_USERNAME/ChatAlert/releases)
+1. Download the latest release from [CurseForge](https://www.curseforge.com/wow/addons/chatalert) or [GitHub Releases](https://github.com/malfurion/WoWChatAlert/releases)
 2. Extract the ZIP file
 3. Copy the `ChatAlert` folder to your World of Warcraft AddOns directory:
 
@@ -206,7 +206,7 @@ This addon is provided as-is for personal use.
 ## Support
 
 For issues or questions, please visit:
-(Add your contact/repository link here)
+- [GitHub Issues](https://github.com/malfurion/WoWChatAlert/issues)
 
 ## Version History
 
