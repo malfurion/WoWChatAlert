@@ -1,5 +1,11 @@
 # ChatAlert Changelog
 
+## [1.0.1] - 2026-01-20
+
+### Changes
+- Enabled automated CurseForge deployment
+- Improved CI/CD pipeline
+
 ## [1.0.0] - 2026-01-20
 
 ### Initial Release
