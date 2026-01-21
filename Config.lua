@@ -10,46 +10,74 @@ function ChatAlert:GetOptionsTable()
         type = "group",
         name = "ChatAlert",
         icon = "Interface\\Icons\\INV_Misc_Horn_01",
+        childGroups = "tab",
         args = {
-            header = {
-                type = "header",
-                name = "ChatAlert Settings",
-                order = 1
+            rules = {
+                type = "group",
+                name = "Rules",
+                order = 1,
+                args = {
+                    header = {
+                        type = "header",
+                        name = "ChatAlert Settings",
+                        order = 1
+                    },
+                    currentZone = {
+                        type = "description",
+                        name = function()
+                            local zoneId = C_Map.GetBestMapForUnit("player")
+                            local mapInfo = zoneId and C_Map.GetMapInfo(zoneId)
+                            local zoneName = mapInfo and mapInfo.name or "Unknown"
+                            return string.format("|cff00ff00Current Zone:|r %s |cff888888(ID: %s)|r", zoneName, zoneId or "?")
+                        end,
+                        fontSize = "medium",
+                        order = 2
+                    },
+                    rulesHeader = {
+                        type = "header",
+                        name = "Pattern Rules",
+                        order = 10
+                    },
+                    addRule = {
+                        type = "execute",
+                        name = "Add New Rule",
+                        desc = "Add a new pattern matching rule",
+                        func = function()
+                            ChatAlert:AddNewRule()
+                        end,
+                        order = 11
+                    }
+                }
             },
-            currentZone = {
-                type = "description",
-                name = function()
-                    local zoneId = C_Map.GetBestMapForUnit("player")
-                    local mapInfo = zoneId and C_Map.GetMapInfo(zoneId)
-                    local zoneName = mapInfo and mapInfo.name or "Unknown"
-                    return string.format("|cff00ff00Current Zone:|r %s |cff888888(ID: %s)|r", zoneName, zoneId or "?")
-                end,
-                fontSize = "medium",
-                order = 2
+            channels = {
+                type = "group",
+                name = "Channels",
+                order = 2,
+                childGroups = "tab",
+                args = {
+                    channelsDesc = {
+                        type = "description",
+                        name = "Select which chat channels should be monitored for pattern matches.",
+                        order = 1
+                    }
+                }
             },
-            rulesHeader = {
-                type = "header",
-                name = "Pattern Rules",
-                order = 10
-            },
-            addRule = {
-                type = "execute",
-                name = "Add New Rule",
-                desc = "Add a new pattern matching rule",
-                func = function()
-                    ChatAlert:AddNewRule()
-                end,
-                order = 11
-            },
-            channelsHeader = {
-                type = "header",
-                name = "Enabled Channels",
-                order = 1000
-            },
-            channelsDesc = {
-                type = "description",
-                name = "Select which chat channels should be monitored for pattern matches.",
-                order = 1001
+            general = {
+                type = "group",
+                name = "General",
+                order = 3,
+                args = {
+                    useFallbackSound = {
+                        type = "toggle",
+                        name = "Use Fallback Sound",
+                        desc = "If the custom sound file cannot be played, use WoW's built-in READY_CHECK sound",
+                        get = function() return self.db.global.useFallbackSound end,
+                        set = function(_, value)
+                            self.db.global.useFallbackSound = value
+                        end,
+                        order = 1
+                    }
+                }
             }
         }
     }
@@ -59,7 +87,7 @@ function ChatAlert:GetOptionsTable()
     for i, rule in ipairs(self.db.global.rules) do
         local ruleKey = "rule" .. i
 
-        options.args[ruleKey] = {
+        options.args.rules.args[ruleKey] = {
             type = "group",
             name = "Rule " .. i .. (rule.enabled and "" or " (Disabled)"),
             inline = true,
@@ -146,62 +174,120 @@ function ChatAlert:GetOptionsTable()
         ruleOrder = ruleOrder + 1
     end
 
-    -- Add channel toggles
-    local channelOrder = 1010
-    local channels = {
-        SAY = "Say",
-        YELL = "Yell",
-        EMOTE = "Emote (/me)",
-        TEXT_EMOTE = "Text Emote",
-        GUILD = "Guild",
-        OFFICER = "Officer",
-        PARTY = "Party",
-        PARTY_LEADER = "Party Leader",
-        RAID = "Raid",
-        RAID_LEADER = "Raid Leader",
-        RAID_WARNING = "Raid Warning",
-        INSTANCE_CHAT = "Instance Chat",
-        INSTANCE_CHAT_LEADER = "Instance Chat Leader",
-        WHISPER = "Whisper",
-        BN_WHISPER = "Battle.net Whisper",
-        CHANNEL = "Channels (General/Trade/etc.)"
-    }
-
-    for channelKey, channelName in pairs(channels) do
-        options.args["channel_" .. channelKey] = {
-            type = "toggle",
-            name = channelName,
-            desc = "Monitor " .. channelName .. " messages",
-            get = function()
-                return self.db.global.enabledChannels[channelKey]
-            end,
-            set = function(_, value)
-                self.db.global.enabledChannels[channelKey] = value
-                -- Re-register events
-                self:RegisterChatEvents()
-            end,
-            order = channelOrder
+    -- Add channel toggles organized by tabs
+    local channelCategories = {
+        playerChat = {
+            name = "Player Chat",
+            order = 1,
+            channels = {
+                SAY = "Say",
+                YELL = "Yell",
+                EMOTE = "Emote (/me)",
+                TEXT_EMOTE = "Text Emote",
+                GUILD = "Guild",
+                OFFICER = "Officer",
+                PARTY = "Party",
+                PARTY_LEADER = "Party Leader",
+                RAID = "Raid",
+                RAID_LEADER = "Raid Leader",
+                RAID_WARNING = "Raid Warning",
+                INSTANCE_CHAT = "Instance Chat",
+                INSTANCE_CHAT_LEADER = "Instance Chat Leader",
+                WHISPER = "Whisper",
+                BN_WHISPER = "Battle.net Whisper",
+                CHANNEL = "Channels (General/Trade/etc.)"
+            }
+        },
+        systemAndAchievements = {
+            name = "System & Achievements",
+            order = 2,
+            channels = {
+                SYSTEM = "System Messages",
+                ACHIEVEMENT = "Achievement",
+                GUILD_ACHIEVEMENT = "Guild Achievement"
+            }
+        },
+        npcsAndMonsters = {
+            name = "NPCs & Monsters",
+            order = 3,
+            channels = {
+                MONSTER_SAY = "Monster Say",
+                MONSTER_YELL = "Monster Yell",
+                MONSTER_WHISPER = "Monster Whisper",
+                MONSTER_EMOTE = "Monster Emote"
+            }
+        },
+        combatAndProgression = {
+            name = "Combat & Progression",
+            order = 4,
+            channels = {
+                COMBAT_XP_GAIN = "XP Gain",
+                COMBAT_HONOR_GAIN = "Honor Gain",
+                COMBAT_FACTION_CHANGE = "Reputation Change",
+                SKILL = "Skill Up"
+            }
+        },
+        lootAndEconomy = {
+            name = "Loot & Economy",
+            order = 5,
+            channels = {
+                LOOT = "Loot",
+                CURRENCY = "Currency",
+                MONEY = "Money"
+            }
+        },
+        pvpAndBattlegrounds = {
+            name = "PvP & Battlegrounds",
+            order = 6,
+            channels = {
+                BG_SYSTEM_NEUTRAL = "BG System (Neutral)",
+                BG_SYSTEM_ALLIANCE = "BG System (Alliance)",
+                BG_SYSTEM_HORDE = "BG System (Horde)"
+            }
+        },
+        miscellaneous = {
+            name = "Miscellaneous",
+            order = 7,
+            channels = {
+                AFK = "AFK Auto-Reply",
+                DND = "DND Auto-Reply",
+                TRADESKILLS = "Tradeskills",
+                OPENING = "Opening (Chests/Containers)",
+                PET_INFO = "Pet Info",
+                TARGETICONS = "Target Icons",
+                BN_INLINE_TOAST_ALERT = "Battle.net Toast Alerts"
+            }
         }
-        channelOrder = channelOrder + 1
+    }
+
+    -- Create tabs for each category
+    for categoryKey, category in pairs(channelCategories) do
+        options.args.channels.args[categoryKey] = {
+            type = "group",
+            name = category.name,
+            order = category.order + 10,
+            args = {}
+        }
+
+        local channelOrder = 1
+        for channelKey, channelName in pairs(category.channels) do
+            options.args.channels.args[categoryKey].args["channel_" .. channelKey] = {
+                type = "toggle",
+                name = channelName,
+                desc = "Monitor " .. channelName .. " messages",
+                get = function()
+                    return self.db.global.enabledChannels[channelKey]
+                end,
+                set = function(_, value)
+                    self.db.global.enabledChannels[channelKey] = value
+                    -- Re-register events
+                    self:RegisterChatEvents()
+                end,
+                order = channelOrder
+            }
+            channelOrder = channelOrder + 1
+        end
     end
-
-    -- Add general settings
-    options.args.generalHeader = {
-        type = "header",
-        name = "General Settings",
-        order = 2000
-    }
-
-    options.args.useFallbackSound = {
-        type = "toggle",
-        name = "Use Fallback Sound",
-        desc = "If the custom sound file cannot be played, use WoW's built-in READY_CHECK sound",
-        get = function() return self.db.global.useFallbackSound end,
-        set = function(_, value)
-            self.db.global.useFallbackSound = value
-        end,
-        order = 2001
-    }
 
     return options
 end

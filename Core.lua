@@ -16,6 +16,7 @@ local defaults = {
             }
         },
         enabledChannels = {
+            -- Player Chat
             SAY = true,
             YELL = true,
             EMOTE = true,
@@ -31,7 +32,38 @@ local defaults = {
             INSTANCE_CHAT_LEADER = true,
             WHISPER = true,
             BN_WHISPER = true,
-            CHANNEL = true
+            CHANNEL = true,
+            -- System Messages
+            SYSTEM = true,
+            ACHIEVEMENT = true,
+            GUILD_ACHIEVEMENT = true,
+            -- NPC/Monster
+            MONSTER_SAY = true,
+            MONSTER_YELL = true,
+            MONSTER_WHISPER = true,
+            MONSTER_EMOTE = true,
+            -- Combat & Progression
+            COMBAT_XP_GAIN = true,
+            COMBAT_HONOR_GAIN = true,
+            COMBAT_FACTION_CHANGE = true,
+            SKILL = true,
+            -- Loot & Money
+            LOOT = true,
+            CURRENCY = true,
+            MONEY = true,
+            -- Battlegrounds/PvP
+            BG_SYSTEM_NEUTRAL = true,
+            BG_SYSTEM_ALLIANCE = true,
+            BG_SYSTEM_HORDE = true,
+            -- Auto-Replies
+            AFK = true,
+            DND = true,
+            -- Other
+            TRADESKILLS = true,
+            OPENING = true,
+            PET_INFO = true,
+            TARGETICONS = true,
+            BN_INLINE_TOAST_ALERT = true
         },
         useFallbackSound = true
     }
@@ -39,6 +71,7 @@ local defaults = {
 
 -- Chat event types mapping
 local CHAT_EVENTS = {
+    -- Player Chat
     "CHAT_MSG_SAY",
     "CHAT_MSG_YELL",
     "CHAT_MSG_EMOTE",
@@ -54,7 +87,38 @@ local CHAT_EVENTS = {
     "CHAT_MSG_INSTANCE_CHAT_LEADER",
     "CHAT_MSG_WHISPER",
     "CHAT_MSG_BN_WHISPER",
-    "CHAT_MSG_CHANNEL"
+    "CHAT_MSG_CHANNEL",
+    -- System Messages
+    "CHAT_MSG_SYSTEM",
+    "CHAT_MSG_ACHIEVEMENT",
+    "CHAT_MSG_GUILD_ACHIEVEMENT",
+    -- NPC/Monster
+    "CHAT_MSG_MONSTER_SAY",
+    "CHAT_MSG_MONSTER_YELL",
+    "CHAT_MSG_MONSTER_WHISPER",
+    "CHAT_MSG_MONSTER_EMOTE",
+    -- Combat & Progression
+    "CHAT_MSG_COMBAT_XP_GAIN",
+    "CHAT_MSG_COMBAT_HONOR_GAIN",
+    "CHAT_MSG_COMBAT_FACTION_CHANGE",
+    "CHAT_MSG_SKILL",
+    -- Loot & Money
+    "CHAT_MSG_LOOT",
+    "CHAT_MSG_CURRENCY",
+    "CHAT_MSG_MONEY",
+    -- Battlegrounds/PvP
+    "CHAT_MSG_BG_SYSTEM_NEUTRAL",
+    "CHAT_MSG_BG_SYSTEM_ALLIANCE",
+    "CHAT_MSG_BG_SYSTEM_HORDE",
+    -- Auto-Replies
+    "CHAT_MSG_AFK",
+    "CHAT_MSG_DND",
+    -- Other
+    "CHAT_MSG_TRADESKILLS",
+    "CHAT_MSG_OPENING",
+    "CHAT_MSG_PET_INFO",
+    "CHAT_MSG_TARGETICONS",
+    "CHAT_MSG_BN_INLINE_TOAST_ALERT"
 }
 
 function ChatAlert:OnInitialize()
