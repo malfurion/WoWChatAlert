@@ -1,5 +1,16 @@
 # ChatAlert Changelog
 
+## [1.0.4] - 2026-01-21
+
+### Added
+- Support for Emote (/me) chat events
+- Support for Text Emote chat events
+- Support for Instance Chat and Instance Chat Leader
+- Support for Battle.net Whisper messages
+
+### Fixed
+- Missing chat event handlers preventing emotes and instance chat from being monitored
+
 ## [1.0.3] - 2026-01-20
 
 ### Changes

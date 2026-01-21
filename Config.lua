@@ -151,6 +151,8 @@ function ChatAlert:GetOptionsTable()
     local channels = {
         SAY = "Say",
         YELL = "Yell",
+        EMOTE = "Emote (/me)",
+        TEXT_EMOTE = "Text Emote",
         GUILD = "Guild",
         OFFICER = "Officer",
         PARTY = "Party",
@@ -158,7 +160,10 @@ function ChatAlert:GetOptionsTable()
         RAID = "Raid",
         RAID_LEADER = "Raid Leader",
         RAID_WARNING = "Raid Warning",
+        INSTANCE_CHAT = "Instance Chat",
+        INSTANCE_CHAT_LEADER = "Instance Chat Leader",
         WHISPER = "Whisper",
+        BN_WHISPER = "Battle.net Whisper",
         CHANNEL = "Channels (General/Trade/etc.)"
     }
 
