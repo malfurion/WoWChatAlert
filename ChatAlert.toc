@@ -1,7 +1,7 @@
 ## Interface: 120000
 ## Title: ChatAlert
 ## Notes: Plays an airhorn sound when chat messages match configured patterns
-## Author: YourName
+## Author: Malfurion
 ## Version: 1.0.5
 ## SavedVariables: ChatAlertDB
 ## IconTexture: Interface\Icons\INV_Misc_Horn_01
