@@ -1,5 +1,11 @@
 # ChatAlert Changelog
 
+## [1.0.3] - 2026-01-20
+
+### Changes
+- Updated for WoW 12.0.0 (Midnight Pre-Patch)
+- Compatible with latest game version
+
 ## [1.0.2] - 2026-01-20
 
 ### Changes
