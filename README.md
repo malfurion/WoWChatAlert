@@ -21,6 +21,8 @@ A World of Warcraft addon that monitors chat messages and plays an airhorn sound
 - Custom sound file support with fallback to WoW sounds
 - Easy-to-use configuration interface
 - Real-time zone ID display
+- Automatic instance detection (disables monitoring in dungeons/raids to prevent API issues)
+- Optional debug mode for troubleshooting
 
 ## Installation
 
@@ -102,7 +104,7 @@ The settings panel displays your current zone name and ID at the top. Use this t
 
 ### Enabling/Disabling Channels
 
-Scroll down in the settings to find the "Enabled Channels" section. Toggle which chat channels you want to monitor:
+Navigate to the "Channels" tab in settings to toggle which chat channels you want to monitor:
 
 - Say
 - Yell
@@ -113,8 +115,18 @@ Scroll down in the settings to find the "Enabled Channels" section. Toggle which
 - Raid
 - Raid Leader
 - Raid Warning
+- Instance Chat
 - Whisper
+- Battle.net Whisper
 - Channels (General/Trade/etc.)
+- And many more organized by category
+
+### General Settings
+
+In the "General" tab you can configure:
+
+- **Use Fallback Sound**: If custom sound fails, use WoW's built-in READY_CHECK sound
+- **Debug Mode**: Enable to see messages when chat monitoring is enabled/disabled (useful for troubleshooting instance detection)
 
 ## Examples
 
@@ -193,6 +205,7 @@ You can manually edit this file if needed (make sure WoW is closed).
 - Only one sound plays per message (first matching rule)
 - Zone detection uses map ID (not sub-zones)
 - Channel filter applies to all rules (not per-rule)
+- Chat monitoring is automatically disabled in instances (dungeons, raids, scenarios, arenas, battlegrounds) to prevent API access issues
 
 ## License
 
@@ -209,6 +222,14 @@ For issues or questions, please visit:
 - [GitHub Issues](https://github.com/malfurion/WoWChatAlert/issues)
 
 ## Version History
+
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
+
+### Latest Changes
+
+- Automatic instance detection (prevents API issues in dungeons/raids)
+- Debug mode for troubleshooting
+- Comprehensive chat event support including emotes, instance chat, and Battle.net whispers
 
 ### 1.0.0
 - Initial release

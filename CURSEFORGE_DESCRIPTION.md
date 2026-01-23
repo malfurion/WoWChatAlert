@@ -7,9 +7,11 @@
 - **🎯 Smart Pattern Matching** - Create custom rules to match specific keywords or phrases
 - **🔊 Customizable Alerts** - Use your own sound files or WoW's built-in sounds
 - **📍 Zone-Specific Rules** - Trigger alerts only in specific zones (e.g., only alert "LFG" in capital cities)
-- **💬 Multi-Channel Support** - Monitor Say, Yell, Guild, Whisper, Party, Raid, and more
+- **💬 Multi-Channel Support** - Monitor Say, Yell, Guild, Whisper, Party, Raid, Instance Chat, Battle.net Whispers, and more
+- **🛡️ Instance Protection** - Automatically disables in dungeons/raids to prevent API issues
 - **⚙️ Easy Configuration** - Intuitive in-game interface built with Ace3
 - **🎚️ Flexible Control** - Enable/disable rules and channels on the fly
+- **🐛 Debug Mode** - Optional troubleshooting mode to monitor addon behavior
 
 ## 🎮 Perfect For
 

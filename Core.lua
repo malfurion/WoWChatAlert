@@ -6,6 +6,7 @@ ChatAlert = LibStub("AceAddon-3.0"):NewAddon("ChatAlert", "AceEvent-3.0", "AceCo
 -- Default database structure
 local defaults = {
     global = {
+        debug = false,
         rules = {
             {
                 pattern = "inv",
@@ -121,6 +122,12 @@ local CHAT_EVENTS = {
     "CHAT_MSG_BN_INLINE_TOAST_ALERT"
 }
 
+function ChatAlert:DebugPrint(...)
+    if self.db and self.db.global.debug then
+        self:Print(...)
+    end
+end
+
 function ChatAlert:OnInitialize()
     -- Initialize database
     self.db = LibStub("AceDB-3.0"):New("ChatAlertDB", defaults, true)
@@ -133,19 +140,48 @@ function ChatAlert:OnInitialize()
 end
 
 function ChatAlert:OnEnable()
-    -- Register all chat events
-    self:RegisterChatEvents()
-
     -- Register zone change event
     self:RegisterEvent("ZONE_CHANGED_NEW_AREA", "OnZoneChanged")
 
+    -- Register instance detection event
+    self:RegisterEvent("PLAYER_ENTERING_WORLD", "OnPlayerEnteringWorld")
+
     -- Cache current zone
     self.currentZone = self:GetCurrentZoneId()
+
+    -- Update event registration based on instance status
+    self:UpdateEventRegistration()
 end
 
 function ChatAlert:OnDisable()
     -- Unregister all events
     self:UnregisterAllEvents()
+end
+
+function ChatAlert:IsPlayerInInstance()
+    local inInstance, instanceType = IsInInstance()
+    -- instanceType can be: "none", "pvp", "arena", "party", "raid", "scenario"
+    -- We disable the addon in all instance types except "none"
+    return inInstance and instanceType ~= "none"
+end
+
+function ChatAlert:OnPlayerEnteringWorld()
+    -- Update event registration when entering/leaving instance
+    self:UpdateEventRegistration()
+end
+
+function ChatAlert:UpdateEventRegistration()
+    if self:IsPlayerInInstance() then
+        -- Unregister all chat events when in instance
+        for _, event in ipairs(CHAT_EVENTS) do
+            self:UnregisterEvent(event)
+        end
+        self:DebugPrint("Chat monitoring disabled (in instance)")
+    else
+        -- Register chat events when not in instance
+        self:RegisterChatEvents()
+        self:DebugPrint("Chat monitoring enabled")
+    end
 end
 
 function ChatAlert:RegisterChatEvents()

@@ -41,10 +41,12 @@ ChatAlert/
   - Addon initialization with AceAddon
   - Database setup with defaults
   - Chat event registration and handling
+  - Instance detection and automatic event management
   - Pattern matching logic (exact and contains)
   - Zone detection and filtering
   - Sound playback with fallback
   - Rule management (add/delete)
+  - Debug output functionality
 
 - **Config.lua**: Configuration UI using AceConfig framework:
   - Dynamic options table generation
@@ -129,6 +131,7 @@ Structure:
 ```lua
 ChatAlertDB = {
     global = {
+        debug = false,
         rules = { ... },
         enabledChannels = { ... },
         useFallbackSound = true
@@ -141,8 +144,12 @@ ChatAlertDB = {
 - Pattern matching is case-insensitive
 - Only one sound plays per message (first matching rule)
 - Zone detection uses C_Map.GetBestMapForUnit("player")
-- Events are dynamically registered based on enabled channels
+- Instance detection uses IsInInstance() API
+- Events are dynamically registered based on enabled channels and instance status
+- Chat monitoring automatically disabled in instances (dungeons, raids, scenarios, arenas, battlegrounds)
+- PLAYER_ENTERING_WORLD event monitors instance transitions
 - Config uses functional options table for dynamic updates
+- Debug mode controls visibility of status messages
 
 ## Next Steps
 

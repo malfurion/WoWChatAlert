@@ -76,6 +76,16 @@ function ChatAlert:GetOptionsTable()
                             self.db.global.useFallbackSound = value
                         end,
                         order = 1
+                    },
+                    debug = {
+                        type = "toggle",
+                        name = "Debug Mode",
+                        desc = "Enable debug messages (shows when chat monitoring is enabled/disabled)",
+                        get = function() return self.db.global.debug end,
+                        set = function(_, value)
+                            self.db.global.debug = value
+                        end,
+                        order = 2
                     }
                 }
             }

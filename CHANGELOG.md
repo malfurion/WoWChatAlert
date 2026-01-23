@@ -1,5 +1,28 @@
 # ChatAlert Changelog
 
+## [1.0.6] - 2026-01-23
+
+### Added
+- Automatic instance detection: Chat monitoring is now automatically disabled when entering instances (dungeons, raids, scenarios, arenas, battlegrounds)
+- Debug mode: Optional setting to display monitoring status messages (enable in General settings)
+- `DebugPrint()` function for conditional debug output
+
+### Changed
+- Event registration now updates dynamically based on instance status
+- Monitoring status messages only shown when debug mode is enabled
+
+### Fixed
+- Prevented potential API access issues in instances by disabling chat monitoring in instanced content
+
+## [1.0.5] - 2026-01-22
+
+### Added
+- Comprehensive support for all chat event types organized by category
+- UI tabs for better organization of channel settings
+
+### Changed
+- Reorganized channel settings into categorized tabs (Player Chat, System & Achievements, NPCs & Monsters, Combat & Progression, Loot & Economy, PvP & Battlegrounds, Miscellaneous)
+
 ## [1.0.4] - 2026-01-21
 
 ### Added
